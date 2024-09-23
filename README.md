@@ -72,6 +72,15 @@ clickhouse-backup restore --tables=db_name.table_name my_table_backup
 clickhouse-backup restore --tables=default.testCreateusers testCreateusers_backup
 ```
 
+##
+
+## 전체복원
+
+```
+// 전체복원
+ clickhouse-backup restore /var/lib/clickhouse/backup/chouse_multiple_backup20240919
+```
+
 ## **도커 컨테이너로 DB 쓸때**
 
 **`clickhouse-backup`** 도구가 표준 패키지 리포지토리에서 제공되지 않기 때문에 `apt-get`으로 설치하려고 할 때 오류가 발생한 것입니다. 이 경우, **`clickhouse-backup`** 도구는 **GitHub**에서 직접 설치해야 합니다.
