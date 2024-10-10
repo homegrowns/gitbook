@@ -187,3 +187,23 @@ docker cp <container_name>:/var/lib/clickhouse/backup /path/to/local/backup/
 * **Docker 로그**를 확인하여 문제가 있는지 확인하고, 필요시 작업을 나누어서 처리하세요.
 
 이 방법을 통해 문제를 해결하고 복사를 완료할 수 있을 것입니다.
+
+
+
+
+
+ClickHouse 컨테이너에 로컬에 있는 백업 파일을 복사해 가져오려면 `docker cp` 명령어를 사용할 수 있습니다. 이 명령어는 Docker 컨테이너와 호스트 간에 파일을 복사하는데 사용됩니다.
+
+명령어 형식은 다음과 같습니다:
+
+```bash
+bash코드 복사docker cp <로컬 파일 경로> <컨테이너 이름 또는 ID>:<컨테이너 내 파일 경로>
+```
+
+예를 들어, 로컬에 `backup_file.sql`이라는 백업 파일이 있고 이를 ClickHouse 컨테이너의 `/var/lib/clickhouse/backup/` 디렉터리에 복사하고 싶다면, 다음 명령어를 사용하면 됩니다:
+
+```bash
+bash코드 복사docker cp /path/to/backup_file.sql <컨테이너 이름 또는 ID>:/var/lib/clickhouse/backup/
+```
+
+컨테이너 이름 또는 ID는 `docker ps` 명령어로 확인할 수 있습니다.
