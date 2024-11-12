@@ -83,6 +83,36 @@ clickhouse-backup restore --tables=default.testCreateusers testCreateusers_backu
 
 ## **도커 컨테이너로 DB 쓸때**
 
+***
+
+**그전에 컨테이너 실행할때는**&#x20;
+
+루트 접속을 하자
+
+1.  **컨테이너에 루트 사용자로 접속**
+
+    권한 변경을 위해 `root` 사용자로 컨테이너에 접근하세요.
+
+    ```bash
+    docker exec -it -u root <container_name> /bin/bash
+    ```
+2.  **`clickhouse` 사용자에게 모든 백업 파일에 대한 권한 부여**
+
+    이제 `/var/lib/clickhouse/backup/` 경로에 대해 `clickhouse` 사용자에게 소유권을 설정합니다.
+
+    ```bash
+    chown -R clickhouse:clickhouse /var/lib/clickhouse/backup/
+    chmod -R 755 /var/lib/clickhouse/backup/
+    ```
+3.  **ClickHouse 서비스 재시작**
+
+    권한 설정이 완료되면, `clickhouse-server` 서비스를 재시작하여 변경 사항이 적용되도록 합니다.
+4.  **복원 작업 재시도**
+
+    이제 `clickhouse-backup`을 다시 실행하여 복원 작업을 시도해 보세요.
+
+***
+
 **`clickhouse-backup`** 도구가 표준 패키지 리포지토리에서 제공되지 않기 때문에 `apt-get`으로 설치하려고 할 때 오류가 발생한 것입니다. 이 경우, **`clickhouse-backup`** 도구는 **GitHub**에서 직접 설치해야 합니다.
 
 #### `clickhouse-backup` 설치 방법 (Docker 컨테이너 내에서)
